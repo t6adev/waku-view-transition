@@ -1,13 +1,13 @@
 'use client';
 
-import { useBrowserNativeTransitions } from './browser-native-events.js';
+// import { useBrowserNativeTransitions } from './browser-native-events.js';
 
 export function ViewTransitions({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  useBrowserNativeTransitions();
+  // useBrowserNativeTransitions();
   return <>{children}</>;
 }
 

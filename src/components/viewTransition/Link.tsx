@@ -6,26 +6,32 @@
 
 import { Link as WakuLink, useRouter_UNSTABLE as useRouter } from 'waku';
 
-import { startTransition, useCallback } from 'react';
+import { startTransition, useCallback, type AnchorHTMLAttributes } from 'react';
 
-export function Link(props: React.ComponentProps<typeof WakuLink>) {
+// For now, only handling `to` and `children` props
+export function Link(
+  props: Pick<React.ComponentProps<typeof WakuLink>, 'to' | 'children'> &
+    Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'>
+) {
   const router = useRouter();
 
   const onClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>) => {
+      e.preventDefault();
       if (props.onClick) {
         props.onClick(e);
       }
-
       if ('startViewTransition' in document) {
-        e.preventDefault();
-
-        // @ts-ignore
-        document.startViewTransition(() => {});
+        router.prefetch(props.to);
+        startTransition(() => {
+          router.push(props.to);
+          // @ts-ignore
+          document.startViewTransition(() => {});
+        });
       }
     },
     [props.to, props.onClick]
   );
 
-  return <WakuLink {...props} onClick={onClick} unstable_prefetchOnEnter />;
+  return <a {...props} onClick={onClick} />;
 }
