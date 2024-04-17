@@ -8,9 +8,9 @@ import { Link as WakuLink, useRouter_UNSTABLE as useRouter } from 'waku';
 
 import { startTransition, useCallback } from 'react';
 
-import { useSetAtom } from 'jotai';
+// import { useSetAtom } from 'jotai';
 
-import { finishViewTransitionAtom } from './TransitionContext.js';
+// import { finishViewTransitionAtom } from './TransitionContext.js';
 // import { useSetFinishViewTransition } from './TransitionContext.js';
 
 // This is a wrapper around next/link that explicitly uses the router APIs
@@ -18,7 +18,7 @@ import { finishViewTransitionAtom } from './TransitionContext.js';
 
 export function Link(props: React.ComponentProps<typeof WakuLink>) {
   const router = useRouter();
-  const finishViewTransition = useSetAtom(finishViewTransitionAtom);
+  // const finishViewTransition = useSetAtom(finishViewTransitionAtom);
   // const finishViewTransition = useSetFinishViewTransition();
 
   const onClick = useCallback(
@@ -33,12 +33,12 @@ export function Link(props: React.ComponentProps<typeof WakuLink>) {
         // @ts-ignore
         document.startViewTransition(
           () =>
-            new Promise<void>((resolve) => {
-              startTransition(() => {
-                router.push(props.to);
-                finishViewTransition(resolve);
-              });
+            // new Promise<void>((resolve) => {
+            startTransition(() => {
+              router.push(props.to);
+              // resolve();
             })
+          // })
         );
       }
     },
