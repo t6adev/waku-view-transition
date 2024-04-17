@@ -37,6 +37,6 @@ const getData = async () => {
 
 export const getConfig = async () => {
   return {
-    render: 'static', // View Transition does not work on dynamic routes currently, waku@0.20.0
+    render: 'dynamic',
   };
 };

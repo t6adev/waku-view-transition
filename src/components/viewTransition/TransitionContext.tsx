@@ -1,35 +1,14 @@
 'use client';
-import { atom, createStore, Provider } from 'jotai';
 
 import { useBrowserNativeTransitions } from './browser-native-events.js';
-
-const myStore = createStore();
-
-const baseFinishViewTransitionAtom = atom<{ r: null | (() => void) }>({ r: null });
-export const finishViewTransitionAtom = atom(
-  (get) => get(baseFinishViewTransitionAtom),
-  (get, set, r: () => void) => {
-    r();
-    set(baseFinishViewTransitionAtom, { r: null });
-  }
-);
-
-const Layer = () => {
-  useBrowserNativeTransitions();
-  return null;
-};
 
 export function ViewTransitions({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <Provider store={myStore}>
-      <Layer />
-      {children}
-    </Provider>
-  );
+  useBrowserNativeTransitions();
+  return <>{children}</>;
 }
 
 /**
