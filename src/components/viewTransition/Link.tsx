@@ -8,18 +8,8 @@ import { Link as WakuLink, useRouter_UNSTABLE as useRouter } from 'waku';
 
 import { startTransition, useCallback } from 'react';
 
-// import { useSetAtom } from 'jotai';
-
-// import { finishViewTransitionAtom } from './TransitionContext.js';
-// import { useSetFinishViewTransition } from './TransitionContext.js';
-
-// This is a wrapper around next/link that explicitly uses the router APIs
-// to navigate, and trigger a view transition.
-
 export function Link(props: React.ComponentProps<typeof WakuLink>) {
   const router = useRouter();
-  // const finishViewTransition = useSetAtom(finishViewTransitionAtom);
-  // const finishViewTransition = useSetFinishViewTransition();
 
   const onClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -33,17 +23,17 @@ export function Link(props: React.ComponentProps<typeof WakuLink>) {
         // @ts-ignore
         document.startViewTransition(
           () =>
-            // new Promise<void>((resolve) => {
-            startTransition(() => {
-              router.push(props.to);
-              // resolve();
+            new Promise<void>((resolve) => {
+              startTransition(() => {
+                router.push(props.to);
+                resolve();
+              });
             })
-          // })
         );
       }
     },
     [props.to, props.onClick]
   );
 
-  return <WakuLink {...props} onClick={onClick} />;
+  return <WakuLink {...props} onClick={onClick} unstable_prefetchOnEnter />;
 }
