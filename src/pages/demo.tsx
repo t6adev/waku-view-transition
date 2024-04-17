@@ -14,6 +14,6 @@ export default function Page() {
 
 export const getConfig = async () => {
   return {
-    render: 'dynamic',
+    render: 'static',
   };
 };

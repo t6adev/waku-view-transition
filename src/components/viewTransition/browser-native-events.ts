@@ -22,8 +22,7 @@ let currentViewTransition:
     ] = null;
 
 export function useBrowserNativeTransitions() {
-  const router = useRouter();
-  const { path: pathname } = router.value;
+  const { path: pathname } = useRouter();
   const currentPathname = useRef(pathname);
 
   const transition = useSyncExternalStore(
