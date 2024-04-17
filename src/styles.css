@@ -3,6 +3,12 @@
 @tailwind components;
 @tailwind utilities;
 
+a {
+  color: #747991;
+  text-decoration: underline solid currentColor;
+  cursor: pointer;
+}
+
 .demo {
   view-transition-name: demo-title;
   width: fit-content;
@@ -12,6 +18,14 @@
   padding: 1rem;
   border: 1px solid #ddd;
   width: 600px;
+  max-width: 100%;
+  border-radius: 3px;
+}
+
+.demo-box2 {
+  padding: 1rem;
+  border: 1px solid #537562;
+  width: 300px;
   max-width: 100%;
   border-radius: 3px;
 }

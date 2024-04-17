@@ -11,7 +11,5 @@ When you click the demo link, the view transition animation should correctly wor
 (+ Then click browser back button after transitions, of course it should be animated)
 
 ## Current Status
-Unfortunately, there are things not working yet.
-Here is my note:
-- Using browser back is not correctly working
-- Sometimes not animated
+🚧 🚧 Unfortunately, there are things not working yet. 🚧 🚧
+
