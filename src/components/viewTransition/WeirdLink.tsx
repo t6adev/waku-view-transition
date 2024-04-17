@@ -5,7 +5,9 @@ import { Link as WakuLink, useRouter_UNSTABLE as useRouter } from 'waku';
 import { startTransition, useCallback } from 'react';
 
 /**
- * CAUTION: This looks like it works unexpectedly but it should not be correct. 🥴
+ * CAUTION:
+ *   - This looks like it works unexpectedly but it should not be correct. 🥴
+ *   - Wow, it works with `render: 'dynamic'` mode
  */
 export function Link(props: React.ComponentProps<typeof WakuLink>) {
   const router = useRouter();
