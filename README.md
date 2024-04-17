@@ -14,4 +14,4 @@ When you click the demo link, the view transition animation should correctly wor
 Unfortunately, there are things not working yet.
 Here is my note:
 - Using browser back is not correctly working
-- Sometimes not animations are not working
+- Sometimes not animated
