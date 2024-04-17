@@ -1,4 +1,5 @@
 import { Link } from '../components/viewTransition/Link.js';
+import { Link as WeirdLink } from '../components/viewTransition/WeirdLink.js';
 
 export default function Page() {
   return (
@@ -13,6 +14,12 @@ export default function Page() {
       <Link to="/demo2" className="block">
         Open Demo 2 →
       </Link>
+      <WeirdLink to="/" className="block">
+        With WeirdLink: Open homepage →
+      </WeirdLink>
+      <WeirdLink to="/demo2" className="block">
+        With WeirdLink: Open Demo 2 →
+      </WeirdLink>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { Link } from 'waku';
 import { Link as ViewTransitionLink } from '../components/viewTransition/Link.js';
+import { Link as WeirdLink } from '../components/viewTransition/WeirdLink.js';
 
 import { Counter } from '../components/counter.js';
 
@@ -16,6 +17,9 @@ export default async function HomePage() {
       </h2>
       <p>
         <ViewTransitionLink to="/demo">Go to /demo →</ViewTransitionLink>
+      </p>
+      <p>
+        <WeirdLink to="/demo">With WeirdLink: Go to /demo →</WeirdLink>
       </p>
       <Counter />
       <Link to="/about" className="mt-4 inline-block underline">
