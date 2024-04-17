@@ -21,15 +21,7 @@ export function Link(props: React.ComponentProps<typeof WakuLink>) {
         e.preventDefault();
 
         // @ts-ignore
-        document.startViewTransition(
-          () =>
-            new Promise<void>((resolve) => {
-              startTransition(() => {
-                router.push(props.to);
-                resolve();
-              });
-            })
-        );
+        document.startViewTransition(() => router.push(props.to));
       }
     },
     [props.to, props.onClick]
