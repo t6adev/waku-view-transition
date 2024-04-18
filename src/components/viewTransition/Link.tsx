@@ -7,7 +7,7 @@
 import { Link as WakuLink, useRouter_UNSTABLE as useRouter } from 'waku';
 
 import { startTransition, useCallback, type AnchorHTMLAttributes } from 'react';
-import { flushSync } from 'react-dom';
+import { useSetFinishViewTransition } from './TransitionContext.js';
 
 // For now, only handling `to` and `children` props
 export function Link(
@@ -15,6 +15,7 @@ export function Link(
     Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'>
 ) {
   const router = useRouter();
+  const setFinishViewTransition = useSetFinishViewTransition();
 
   const onClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -23,28 +24,16 @@ export function Link(
         props.onClick(e);
       }
       if ('startViewTransition' in document) {
-        /**
-         * Note:
-         *   - Not working with `render: 'dynamic'` mode
-         *   - It should resolve this Link problem first, then tackle popstate event issue
-         */
-        /* Pattern 1: Unstable behavior */
-        // startTransition(() => {
-        //   router.push(props.to);
-        //   // @ts-ignore
-        //   document.startViewTransition(() => {});
-        // });
-        /* --- or --- */
-        /**
-         * Pattern 2: First animation does not work, but afterwards it does. It's a better solution?
-         * Ref: https://codesandbox.io/s/nervous-mclaren-j8v8y0?file=/src/App.tsx in https://developer.chrome.com/docs/web-platform/view-transitions/#transitions-as-an-enhancement
-         */
         // @ts-ignore
-        document.startViewTransition(() => {
-          flushSync(() => {
-            router.push(props.to);
-          });
-        });
+        document.startViewTransition(
+          () =>
+            new Promise((resolve) => {
+              startTransition(() => {
+                router.push(props.to);
+                setFinishViewTransition(() => resolve);
+              });
+            })
+        );
       }
     },
     [props.to, props.onClick]
